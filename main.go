@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/taybart/args"
@@ -77,5 +78,15 @@ func run() error {
 		fmt.Println(ts.Unix())
 		return nil
 	}
+	if len(os.Args) > 1 {
+		i, err := strconv.ParseInt(os.Args[1], 10, 64)
+		if err != nil {
+			return err
+		}
+		ts := time.Unix(i, 0)
+		fmt.Println(ts.UTC())
+		return nil
+	}
+	fmt.Println(time.Now().Unix())
 	return nil
 }
